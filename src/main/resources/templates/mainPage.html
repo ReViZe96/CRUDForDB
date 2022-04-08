@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>CRUD-методы для базы данных пользователей</title>
+</head>
+<body>
+<a th:href="@{/user/add}">Добавить покупателя</a>
+<a th:href="@{/user/find}">Найти покупателя</a>
+<h1>Все покупатели</h1>
+<table>
+    <tr>
+        <td><h3>ФИО</h3></td>
+        <td><h3>Адрес электронной почты</h3></td>
+        <td><h3>Номер телефона</h3></td>
+    </tr>
+    <tr th:each="user : ${allUsers}">
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.phone_number}"></td>
+        <td>
+            <form th:action="'/user/deleteCurrent/'+${user.id}" method="post">
+                <button type="submit">Удалить покупателя</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/user/editName/'+${user.id}" method="post">
+                <input type="text" pattern="\D{1,500}" name="name" placeholder="Введите новое ФИО" required>
+                <button type="submit">Изменить ФИО</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/user/editEmail/'+${user.id}" method="post">
+                <input type="text" pattern=".{1,100}" name="email" placeholder="Введите новый адрес электронной почты"
+                       required>
+                <button type="submit">Изменить адрес электронной почты</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/user/editNumber/'+${user.id}" method="post">
+                <input type="text" pattern="\d{1,18}" name="phone_number" placeholder="Введите новый номер телефона"
+                       required>
+                <button type="submit">Изменить номер телефона</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

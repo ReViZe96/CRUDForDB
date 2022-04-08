@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Найденные покупатели</title>
+</head>
+<body>
+<a th:href="@{/user/mainPage}">На главную</a>
+<a th:href="@{/user/add}">Добавить покупателя</a>
+<h1>Найдены следующие покупатели</h1>
+<table>
+    <tr>
+        <td><h3>ФИО</h3></td>
+        <td><h3>Электронная почта</h3></td>
+        <td><h3>Номер телефона</h3></td>
+    </tr>
+    <tr th:each="users : ${foundUsers}">
+        <td th:text="${users.name}"></td>
+        <td th:text="${users.email}"></td>
+        <td th:text="${users.phone_number}"></td>
+        <td>
+            <form th:action="'/user/deleteCurrent/'+${users.id}" method="post">
+                <button type="submit">Удалить покупателя</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/user/editName/'+${users.id}" method="post">
+                <input type="text" pattern="\D{1,500}" name="name" placeholder="Введите новые ФИО" required>
+                <button type="submit">Изменить ФИО</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/user/editEmail/'+${users.id}" method="post">
+                <input type="text" pattern=".{1,100}" name="email" placeholder="Введите новый адрес электронной почты"
+                       required>
+                <button type="submit">Изменить адрес электронной почты</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/user/editNumber/'+${users.id}" method="post">
+                <input type="text" pattern="\d{1,50}" name="phone_number" placeholder="Введите новый номер телефона"
+                       required>
+                <button type="submit">Изменить номер телефона</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

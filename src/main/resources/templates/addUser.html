@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xml:lang="ru-ru" lang="ru-ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить пользователя</title>
+</head>
+<body>
+<h3>Добавление нового пользователя</h3>
+<form th:href="@{/user/add}" method="post">
+    <input type="text" pattern=".{1,100}" name="email" placeholder="Введите адрес электронной почты" required>
+    <input type="text" pattern="\D{1,500}" name="name" placeholder="Введите ФИО" required>
+    <input type="text" pattern="\d{1,18}" name="phone_number" placeholder="Введите номер телефона" required>
+    <button type="submit">Добавить пользователя</button>
+</form>
+</body>
+</html>
